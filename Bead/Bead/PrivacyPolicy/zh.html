@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拼豆图纸 — 隐私政策</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --primary-dark: #5046E5;
+      --secondary: #A78BFA;
+      --accent: #EDE9FE;
+      --bg: #faf8f5;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-secondary: #5a5a72;
+      --text-muted: #8e8ea0;
+      --border: #e8e5e0;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+      background: linear-gradient(160deg, #f5f3ff 0%, #faf8f5 30%, #f0eeff 100%);
+      color: var(--text);
+      line-height: 1.85;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-dots {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #6C63FF 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.10;
+    }
+    .bg-blob--1 {
+      width: 500px; height: 500px;
+      background: var(--primary);
+      top: -120px; right: -150px;
+    }
+    .bg-blob--2 {
+      width: 400px; height: 400px;
+      background: var(--secondary);
+      bottom: -100px; left: -120px;
+    }
+
+    .header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 24px 40px;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108,99,255,0.08);
+      border: 1px solid rgba(108,99,255,0.15);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .header-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--primary) 0%, #8B7CF6 60%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .header .meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    .header .meta span { display: flex; align-items: center; gap: 6px; }
+    .header .meta .sep {
+      width: 4px; height: 4px;
+      background: var(--border);
+      border-radius: 50%;
+    }
+    .header .meta .icon {
+      font-size: 15px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.04),
+        0 8px 40px rgba(0,0,0,0.04),
+        0 20px 60px rgba(0,0,0,0.02);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .toc {
+      padding: 40px 44px 32px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(108,99,255,0.02) 0%, transparent 100%);
+    }
+    .toc h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .toc-item:hover {
+      background: rgba(108,99,255,0.05);
+      color: var(--primary-dark);
+    }
+    .toc-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .content { padding: 44px; }
+
+    .section { margin-bottom: 44px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .section-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 4px 16px rgba(108,99,255,0.25);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      padding-top: 8px;
+    }
+
+    .section-body {
+      padding-left: 60px;
+    }
+
+    .subsection {
+      margin-bottom: 20px;
+    }
+    .subsection:last-child { margin-bottom: 0; }
+
+    .subsection-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      padding: 4px 14px;
+      background: rgba(108,99,255,0.06);
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+    .subsection-label strong {
+      font-weight: 800;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    }
+
+    .subsection p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 10px;
+    }
+    .subsection p:last-child { margin-bottom: 0; }
+
+    .subsection ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+    .subsection ul li {
+      position: relative;
+      padding-left: 24px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+    .subsection ul li::before {
+      content: '';
+      position: absolute;
+      left: 4px; top: 10px;
+      width: 6px; height: 6px;
+      background: var(--primary);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+
+    .info-box {
+      margin-top: 16px;
+      padding: 18px 22px;
+      background: rgba(108,99,255,0.04);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(108,99,255,0.1);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .info-box .info-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .info-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .info-box table th,
+    .info-box table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(108,99,255,0.08);
+    }
+    .info-box table th {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 12px;
+      background: rgba(108,99,255,0.04);
+    }
+    .info-box table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .emph {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 36px 0;
+    }
+
+    .contact-card {
+      margin-top: 20px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(108,99,255,0.04) 0%, rgba(167,139,250,0.04) 100%);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .contact-card .email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 6px;
+      padding: 10px 18px;
+      background: rgba(108,99,255,0.06);
+      border-radius: 8px;
+    }
+    .contact-card .email .eicon {
+      font-size: 18px;
+    }
+    .contact-card .note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px 48px;
+    }
+    .footer-signoff {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .footer-heart {
+      font-size: 20px;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.25s ease;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    }
+    .back-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-top:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(108,99,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .header { padding: 40px 16px 28px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 28px 20px; }
+      .toc { padding: 28px 20px 24px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .section-header { gap: 10px; }
+      .section-num { min-width: 36px; height: 36px; font-size: 15px; border-radius: 10px; }
+      .section-title { font-size: 18px; padding-top: 5px; }
+      .section-body { padding-left: 0; margin-top: 14px; }
+      .subsection-label { font-size: 13px; }
+      .back-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .bg-dots, .bg-blob, .back-top { display: none; }
+      .card { box-shadow: none; border: none; }
+      .content, .toc { padding: 24px 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-dots"></div>
+<div class="bg-blob bg-blob--1"></div>
+<div class="bg-blob bg-blob--2"></div>
+
+<header class="header">
+  <div class="header-badge">🔒 隐私文档</div>
+  <h1>拼豆图纸隐私政策</h1>
+  <div class="meta">
+    <span><span class="icon">📅</span> 生效日期：2026 年 6 月 8 日</span>
+    <span class="sep"></span>
+    <span><span class="icon">📧</span> pindou888@outlook.com</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <div class="toc">
+      <h2>目录</h2>
+      <div class="toc-grid">
+        <a href="#s1" class="toc-item"><span class="toc-num">一</span> 我们收集的信息</a>
+        <a href="#s2" class="toc-item"><span class="toc-num">二</span> 我们如何使用信息</a>
+        <a href="#s3" class="toc-item"><span class="toc-num">三</span> 数据存储与安全</a>
+        <a href="#s4" class="toc-item"><span class="toc-num">四</span> 信息共享与披露</a>
+        <a href="#s5" class="toc-item"><span class="toc-num">五</span> 您的权利</a>
+        <a href="#s6" class="toc-item"><span class="toc-num">六</span> 儿童隐私</a>
+        <a href="#s7" class="toc-item"><span class="toc-num">七</span> 政策更新</a>
+        <a href="#s8" class="toc-item"><span class="toc-num">八</span> 联系我们</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- 引言 -->
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.9;margin-bottom:20px;">
+        欢迎您使用<span class="emph">拼豆图纸</span>！拼豆图纸（以下简称"我们"）深知个人信息对您的重要性，我们将按法律法规要求，采取相应安全保护措施，尽力保护您的个人信息安全可控。
+      </p>
+      <p style="font-size:15px;line-height:1.9;margin-bottom:20px;">
+        <span class="emph">本隐私政策旨在向您说明我们如何收集、使用、存储、共享和保护您的个人信息，以及您所享有的相关权利。请您在使用拼豆图纸应用（以下简称"本应用"）前，仔细阅读并充分理解本隐私政策的所有条款，特别是以加粗标识的重要内容。</span>如您不同意本隐私政策的任何内容，请立即停止使用本应用。
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Section 1 -->
+      <div class="section" id="s1">
+        <div class="section-header">
+          <div class="section-num">一</div>
+          <h2 class="section-title">我们收集的信息</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.1</strong> 您主动提供的信息</div>
+            <p>在您使用本应用的过程中，我们可能会收集您主动提供的以下信息：</p>
+            <ul>
+              <li><span class="emph">照片与上传内容</span>——您上传用于拼豆像素画转换的照片</li>
+              <li><span class="emph">生成内容</span>——您创建的拼豆图纸、BOM 采购清单及导出文件</li>
+              <li><span class="emph">反馈与支持</span>——您发送给我们的意见反馈、问题报告或功能建议</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.2</strong> 自动收集的信息</div>
+            <p>当您使用本应用时，我们可能通过标准分析工具自动收集以下信息：</p>
+            <div class="info-box">
+              <div class="info-label">自动收集的数据类型</div>
+              <table>
+                <tr><th>类别</th><th>示例</th><th>用途</th></tr>
+                <tr><td>设备信息</td><td>设备型号、操作系统版本、语言设置</td><td>优化应用兼容性</td></tr>
+                <tr><td>使用数据</td><td>功能使用频率、会话时长</td><td>改善用户体验</td></tr>
+                <tr><td>崩溃日志</td><td>错误报告、堆栈追踪</td><td>修复漏洞、提升稳定性</td></tr>
+                <tr><td>性能数据</td><td>启动耗时、内存占用</td><td>性能优化</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.3</strong> 我们不收集的信息</div>
+            <p><span class="emph">我们不收集</span>您的精确地理位置、通讯录、其他应用的浏览记录、生物识别信息，以及上述范围以外的其他敏感个人信息。</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 2 -->
+      <div class="section" id="s2">
+        <div class="section-header">
+          <div class="section-num">二</div>
+          <h2 class="section-title">我们如何使用信息</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>我们将收集的信息用于以下目的：</p>
+            <ul>
+              <li><span class="emph">提供核心服务</span>——处理您上传的照片，生成拼豆像素画图纸和 BOM 采购清单</li>
+              <li><span class="emph">改进产品</span>——分析使用模式以优化功能和用户体验</li>
+              <li><span class="emph">错误修复</span>——基于崩溃日志和错误报告诊断并解决技术问题</li>
+              <li><span class="emph">客户支持</span>——回应您的咨询、反馈或功能请求</li>
+              <li><span class="emph">法律合规</span>——遵守适用的法律法规和法定义务</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <p><span class="emph">您的照片和生成内容主要在设备本地处理。</span>除非您明确选择为获取支持而分享，我们不会将您上传的照片存储在服务器上。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 3 -->
+      <div class="section" id="s3">
+        <div class="section-header">
+          <div class="section-num">三</div>
+          <h2 class="section-title">数据存储与安全</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.1</strong> 存储位置</div>
+            <p>您的照片、生成的拼豆图纸和 BOM 数据均存储在您的设备本地。在正常使用过程中，我们不会将这些内容上传或存储到云端服务器。分析数据可能通过符合行业标准安全实践的受信任第三方服务进行处理。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.2</strong> 安全措施</div>
+            <p>我们采取商业上合理的安全措施来保护您的信息，包括传输加密（TLS/SSL）和行业标准的访问控制。<span class="emph">但请注意，没有任何电子存储或传输方式是 100% 安全的。</span>我们会尽力保护您的个人信息，但无法保证其绝对安全性。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.3</strong> 数据保留</div>
+            <p>您本地存储的数据（照片、图纸、BOM）将一直保留在您的设备上，直到您主动删除或卸载本应用。分析数据的保留期限通常不超过 24 个月，以合理必要为原则。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 4 -->
+      <div class="section" id="s4">
+        <div class="section-header">
+          <div class="section-num">四</div>
+          <h2 class="section-title">信息共享与披露</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>我们不会向第三方出售、交易或出租您的个人信息。我们仅在以下有限情况下共享信息：</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.1</strong> 服务提供商</div>
+            <p>我们可能委托受信任的第三方服务提供商（如分析工具、崩溃报告服务）协助运营和改进本应用。这些提供商受合同约束，仅代表我们处理数据，并须遵守本隐私政策。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.2</strong> 法律要求</div>
+            <p>在法律要求或响应公共机构的有效请求（如法院命令或政府部门要求）的情况下，我们可能披露您的信息。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.3</strong> 业务转让</div>
+            <p>如发生合并、收购或资产出售等交易，您的信息可能作为交易的一部分被转移。我们将通过应用内通知或电子邮件告知您此类所有权或控制权变更。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.4</strong> 经您同意</div>
+            <p>在获得您的明确同意后，我们可能为其他目的共享您的信息。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 5 -->
+      <div class="section" id="s5">
+        <div class="section-header">
+          <div class="section-num">五</div>
+          <h2 class="section-title">您的权利</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>根据您所在司法管辖区，您可能享有以下个人信息相关权利：</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.1</strong> 访问与携带权</div>
+            <p>您有权请求访问我们持有的关于您的个人信息，并以常用的电子格式获取副本。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.2</strong> 更正与删除权</div>
+            <p>您可随时请求更正不准确的信息或删除您的个人信息。<span class="emph">由于您的大部分内容存储在设备本地，您可以直接在应用内管理或删除这些内容。</span></p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.3</strong> 撤回同意</div>
+            <p>您可随时通过调整设备设置或卸载本应用来撤回数据收集同意。请注意，撤回同意可能影响某些功能的可用性。</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.4</strong> 行使您的权利</div>
+            <p>如需行使上述任何权利，请通过 <span class="emph">pindou888@outlook.com</span> 与我们联系。我们将在适用法律规定的期限内回应您的请求。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 6 -->
+      <div class="section" id="s6">
+        <div class="section-header">
+          <div class="section-num">六</div>
+          <h2 class="section-title">儿童隐私</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p><span class="emph">本应用不面向 13 周岁以下的儿童。</span>我们不会在知情的情况下收集 13 周岁以下儿童的个人信息。如果我们发现 13 周岁以下的儿童向我们提供了个人信息，我们将立即采取措施删除此类信息。如果您是父母或监护人，认为您的孩子向我们提供了个人信息，请立即与我们联系。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 7 -->
+      <div class="section" id="s7">
+        <div class="section-header">
+          <div class="section-num">七</div>
+          <h2 class="section-title">政策更新</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p><span class="emph">我们可能会不时更新本隐私政策，以反映我们实践、技术、法律要求或其他运营原因的变化。</span>更新政策时，我们将修改页面顶部的"生效日期"，并通过应用内通知或其他适当方式通知您。您在政策更新后继续使用本应用，即视为您接受更新后的政策。建议您定期查阅本页面以了解最新的隐私实践信息。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 8 -->
+      <div class="section" id="s8">
+        <div class="section-header">
+          <div class="section-num">八</div>
+          <h2 class="section-title">联系我们</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p>如您对本隐私政策或我们的数据处理实践有任何疑问、意见或请求，请通过以下方式联系我们：</p>
+            <div class="contact-card">
+              <div class="email">
+                <span class="eicon">✉️</span>
+                <span>pindou888@outlook.com</span>
+              </div>
+              <p class="note">一般情况下，我们会在十五个工作日内给予您回复。紧急隐私问题请在邮件主题中注明"隐私问题"。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-signoff">您的隐私，我们用心守护 <span class="footer-heart">💜</span></p>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" title="返回顶部">↑</button>
+
+<script>
+(function() {
+  var btn = document.getElementById('backTop');
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

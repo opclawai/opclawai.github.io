@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bead Studio — Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --primary-dark: #5046E5;
+      --secondary: #A78BFA;
+      --accent: #EDE9FE;
+      --bg: #faf8f5;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-secondary: #5a5a72;
+      --text-muted: #8e8ea0;
+      --border: #e8e5e0;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(160deg, #f5f3ff 0%, #faf8f5 30%, #f0eeff 100%);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg-dots {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      background-image: radial-gradient(circle, #6C63FF 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.10;
+    }
+    .bg-blob--1 {
+      width: 500px; height: 500px;
+      background: var(--primary);
+      top: -120px; right: -150px;
+    }
+    .bg-blob--2 {
+      width: 400px; height: 400px;
+      background: var(--secondary);
+      bottom: -100px; left: -120px;
+    }
+
+    .header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 24px 40px;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108,99,255,0.08);
+      border: 1px solid rgba(108,99,255,0.15);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .header-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--primary) 0%, #8B7CF6 60%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .header .meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    .header .meta span { display: flex; align-items: center; gap: 6px; }
+    .header .meta .sep {
+      width: 4px; height: 4px;
+      background: var(--border);
+      border-radius: 50%;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.04),
+        0 8px 40px rgba(0,0,0,0.04),
+        0 20px 60px rgba(0,0,0,0.02);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .toc {
+      padding: 40px 44px 32px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(108,99,255,0.02) 0%, transparent 100%);
+    }
+    .toc h2 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .toc-item:hover {
+      background: rgba(108,99,255,0.05);
+      color: var(--primary-dark);
+    }
+    .toc-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .content { padding: 44px; }
+
+    .section { margin-bottom: 44px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .section-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px; height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 4px 16px rgba(108,99,255,0.25);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      padding-top: 8px;
+    }
+
+    .section-body {
+      padding-left: 60px;
+    }
+
+    .subsection {
+      margin-bottom: 20px;
+    }
+    .subsection:last-child { margin-bottom: 0; }
+
+    .subsection-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      padding: 4px 14px;
+      background: rgba(108,99,255,0.06);
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+    .subsection-label strong {
+      font-weight: 800;
+    }
+
+    .subsection p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 10px;
+    }
+    .subsection p:last-child { margin-bottom: 0; }
+
+    .subsection ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+    .subsection ul li {
+      position: relative;
+      padding-left: 24px;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+    .subsection ul li::before {
+      content: '';
+      position: absolute;
+      left: 4px; top: 10px;
+      width: 6px; height: 6px;
+      background: var(--primary);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+
+    .info-box {
+      margin-top: 16px;
+      padding: 18px 22px;
+      background: rgba(108,99,255,0.04);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(108,99,255,0.1);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .info-box .info-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .info-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .info-box table th,
+    .info-box table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(108,99,255,0.08);
+    }
+    .info-box table th {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(108,99,255,0.04);
+    }
+    .info-box table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .emph {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 36px 0;
+    }
+
+    .contact-card {
+      margin-top: 20px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(108,99,255,0.04) 0%, rgba(167,139,250,0.04) 100%);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .contact-card .email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 6px;
+      padding: 10px 18px;
+      background: rgba(108,99,255,0.06);
+      border-radius: 8px;
+    }
+    .contact-card .email .eicon {
+      font-size: 18px;
+    }
+    .contact-card .note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px 48px;
+    }
+    .footer-signoff {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .footer-heart {
+      font-size: 20px;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.25s ease;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    }
+    .back-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-top:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(108,99,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .header { padding: 40px 16px 28px; }
+      .header h1 { font-size: 26px; }
+      .content { padding: 28px 20px; }
+      .toc { padding: 28px 20px 24px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .section-header { gap: 10px; }
+      .section-num { min-width: 36px; height: 36px; font-size: 15px; border-radius: 10px; }
+      .section-title { font-size: 18px; padding-top: 5px; }
+      .section-body { padding-left: 0; margin-top: 14px; }
+      .subsection-label { font-size: 13px; }
+      .back-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .bg-dots, .bg-blob, .back-top { display: none; }
+      .card { box-shadow: none; border: none; }
+      .content, .toc { padding: 24px 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-dots"></div>
+<div class="bg-blob bg-blob--1"></div>
+<div class="bg-blob bg-blob--2"></div>
+
+<header class="header">
+  <div class="header-badge">Privacy Document</div>
+  <h1>Privacy Policy</h1>
+  <div class="meta">
+    <span>📅 Effective Date: June 8, 2026</span>
+    <span class="sep"></span>
+    <span>📧 pindou888@outlook.com</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <div class="toc">
+      <h2>Table of Contents</h2>
+      <div class="toc-grid">
+        <a href="#s1" class="toc-item"><span class="toc-num">1</span> Information We Collect</a>
+        <a href="#s2" class="toc-item"><span class="toc-num">2</span> How We Use Information</a>
+        <a href="#s3" class="toc-item"><span class="toc-num">3</span> Data Storage &amp; Security</a>
+        <a href="#s4" class="toc-item"><span class="toc-num">4</span> Information Sharing</a>
+        <a href="#s5" class="toc-item"><span class="toc-num">5</span> Your Rights</a>
+        <a href="#s6" class="toc-item"><span class="toc-num">6</span> Children&rsquo;s Privacy</a>
+        <a href="#s7" class="toc-item"><span class="toc-num">7</span> Policy Updates</a>
+        <a href="#s8" class="toc-item"><span class="toc-num">8</span> Contact Us</a>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- Preamble -->
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.9;margin-bottom:10px;">
+        Welcome to <span class="emph">Bead Studio</span> (&ldquo;Bead Studio,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;).
+      </p>
+      <p style="font-size:15px;line-height:1.9;margin-bottom:20px;">
+        <span class="emph">This Privacy Policy explains how we collect, use, store, share, and protect your personal information when you use our Bead Studio mobile application (the &ldquo;App&rdquo;). By using the App, you consent to the practices described in this policy.</span> If you do not agree with any part of this policy, please discontinue use of the App immediately.
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Section 1 -->
+      <div class="section" id="s1">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <h2 class="section-title">Information We Collect</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.1</strong> Information You Provide</div>
+            <p>We may collect information you voluntarily provide when using the App, including:</p>
+            <ul>
+              <li><span class="emph">Photos & Uploads</span> &mdash; photos you upload for bead pattern conversion</li>
+              <li><span class="emph">Generated Content</span> &mdash; bead patterns, BOM lists, and export files you create</li>
+              <li><span class="emph">Feedback & Support</span> &mdash; messages, bug reports, or feature requests you send us</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.2</strong> Automatically Collected Information</div>
+            <p>When you use the App, we may automatically collect certain information through standard analytics tools:</p>
+            <div class="info-box">
+              <div class="info-label">Data Collected Automatically</div>
+              <table>
+                <tr><th>Category</th><th>Examples</th><th>Purpose</th></tr>
+                <tr><td>Device Info</td><td>Device model, OS version, language settings</td><td>Optimize app compatibility</td></tr>
+                <tr><td>Usage Data</td><td>Feature usage frequency, session duration</td><td>Improve user experience</td></tr>
+                <tr><td>Crash Logs</td><td>Error reports, stack traces</td><td>Fix bugs and improve stability</td></tr>
+                <tr><td>Performance</td><td>App launch time, memory usage</td><td>Performance optimization</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>1.3</strong> What We Do NOT Collect</div>
+            <p><span class="emph">We do NOT collect</span> precise geolocation data, contact lists, browsing history from other apps, biometric identifiers, or any other sensitive personal information beyond what is listed above.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 2 -->
+      <div class="section" id="s2">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <h2 class="section-title">How We Use Your Information</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>We use the collected information for the following purposes:</p>
+            <ul>
+              <li><span class="emph">Providing Core Services</span> &mdash; Process your uploaded photos to generate bead patterns and BOM lists</li>
+              <li><span class="emph">Improving the App</span> &mdash; Analyze usage patterns to enhance features and user experience</li>
+              <li><span class="emph">Bug Fixing</span> &mdash; Diagnose and resolve technical issues based on crash logs and error reports</li>
+              <li><span class="emph">Customer Support</span> &mdash; Respond to your inquiries, feedback, or feature requests</li>
+              <li><span class="emph">Legal Compliance</span> &mdash; Comply with applicable laws, regulations, and legal obligations</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <p><span class="emph">Your photos and generated content are processed primarily on-device.</span> We do not store your uploaded photos on our servers unless you explicitly choose to share them for support purposes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 3 -->
+      <div class="section" id="s3">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <h2 class="section-title">Data Storage &amp; Security</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.1</strong> Storage Location</div>
+            <p>Your photos, generated bead patterns, and BOM data are stored locally on your device. We do not upload or store this content to our cloud servers during normal usage. Analytics data may be processed through trusted third-party services that comply with industry-standard security practices.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.2</strong> Security Measures</div>
+            <p>We implement commercially reasonable security measures to protect your information, including encryption of data in transit (TLS/SSL) and industry-standard access controls. <span class="emph">However, no method of electronic storage or transmission is 100% secure.</span> While we strive to protect your personal information, we cannot guarantee its absolute security.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>3.3</strong> Data Retention</div>
+            <p>Your locally stored data (photos, patterns, BOMs) remain on your device until you delete them or uninstall the App. Analytics data is retained for a period reasonably necessary to fulfill the purposes described in this policy, typically no longer than 24 months.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 4 -->
+      <div class="section" id="s4">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <h2 class="section-title">Information Sharing &amp; Disclosure</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in the following limited circumstances:</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.1</strong> Service Providers</div>
+            <p>We may engage trusted third-party service providers (e.g., analytics tools, crash reporting services) to assist in operating and improving the App. These providers are contractually bound to process data solely on our behalf and in compliance with this Privacy Policy.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.2</strong> Legal Requirements</div>
+            <p>We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., a court order or government agency).</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.3</strong> Business Transfers</div>
+            <p>In the event of a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of that transaction. You will be notified via the App or email of any such change in ownership or control of your personal information.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>4.4</strong> With Your Consent</div>
+            <p>We may share your information for other purposes with your explicit consent.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 5 -->
+      <div class="section" id="s5">
+        <div class="section-header">
+          <div class="section-num">5</div>
+          <h2 class="section-title">Your Rights</h2>
+        </div>
+        <div class="section-body">
+
+          <div class="subsection">
+            <p>Depending on your jurisdiction, you may have the following rights regarding your personal information:</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.1</strong> Access &amp; Portability</div>
+            <p>You have the right to request access to the personal information we hold about you and to receive a copy in a commonly used electronic format.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.2</strong> Correction &amp; Deletion</div>
+            <p>You may request correction of inaccurate information or deletion of your personal information at any time. <span class="emph">Since most of your content is stored locally on your device, you can manage or delete it directly within the App.</span></p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.3</strong> Withdraw Consent</div>
+            <p>You may withdraw your consent to data collection at any time by adjusting your device settings or uninstalling the App. Note that withdrawing consent may affect the availability or functionality of certain features.</p>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-label"><strong>5.4</strong> Exercise Your Rights</div>
+            <p>To exercise any of these rights, please contact us at <span class="emph">pindou888@outlook.com</span>. We will respond to your request within the time frame required by applicable law.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 6 -->
+      <div class="section" id="s6">
+        <div class="section-header">
+          <div class="section-num">6</div>
+          <h2 class="section-title">Children&rsquo;s Privacy</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p><span class="emph">Our App is not intended for children under the age of 13.</span> We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will take steps to delete such information promptly. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 7 -->
+      <div class="section" id="s7">
+        <div class="section-header">
+          <div class="section-num">7</div>
+          <h2 class="section-title">Changes to This Policy</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p><span class="emph">We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or for other operational reasons.</span> When we update the policy, we will revise the &ldquo;Effective Date&rdquo; at the top of this page and notify you through an in-app notice or other appropriate means. Your continued use of the App after such updates constitutes your acceptance of the revised policy. We encourage you to review this page periodically for the latest information on our privacy practices.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 8 -->
+      <div class="section" id="s8">
+        <div class="section-header">
+          <div class="section-num">8</div>
+          <h2 class="section-title">Contact Us</h2>
+        </div>
+        <div class="section-body">
+          <div class="subsection">
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
+            <div class="contact-card">
+              <div class="email">
+                <span class="eicon">✉️</span>
+                <span>pindou888@outlook.com</span>
+              </div>
+              <p class="note">We will generally respond within 15 business days. For urgent privacy concerns, please include &ldquo;Privacy Concern&rdquo; in the subject line.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-signoff">Your privacy matters to us <span class="footer-heart">💜</span></p>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" title="Back to top">↑</button>
+
+<script>
+(function() {
+  var btn = document.getElementById('backTop');
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

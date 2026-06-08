@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼豆图纸 - AI图片转像素画生成器 | 专业拼豆图纸制作工具</title>
+    <meta name="description" content="拼豆图纸 - 一键将照片转换为拼豆像素画。支持MARD、Perler、Hama、Artkal、COCO五大品牌色板，自动统计用珠数量，高清打印导出。免费下载！">
+    <meta name="keywords" content="拼豆,拼豆图纸,像素画,拼豆App,Perler,fuse beads,拼豆图案设计">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- 预加载动画 -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-beads">
+                <span class="pb pb-1"></span>
+                <span class="pb pb-2"></span>
+                <span class="pb pb-3"></span>
+                <span class="pb pb-4"></span>
+                <span class="pb pb-5"></span>
+            </div>
+            <p class="preloader-text">拼豆图纸 加载中</p>
+        </div>
+    </div>
+
+    <!-- 滚动进度条 -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- 全局装饰粒子 -->
+    <div class="global-particles" id="particles"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <img src="assets/logo.png" alt="拼豆图纸" class="logo-img" width="40" height="40">
+                <span>拼豆图纸</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#features" class="nav-link">功能</a>
+                <a href="#brands" class="nav-link">品牌</a>
+                <a href="#scenes" class="nav-link">场景</a>
+                <a href="#compare" class="nav-link">优势</a>
+                <a href="#workflow" class="nav-link">流程</a>
+                <a href="#download" class="nav-link nav-cta-btn">免费下载</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+            <div class="hero-glow hero-glow-3"></div>
+            <div class="hero-dots"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        上传一张照片<br>
+                        <span class="gradient-text">秒变拼豆图纸</span>
+                    </h1>
+                    <p class="hero-desc">
+                        AI 智能识别色彩，精准匹配五大品牌色号<br>
+                        自动生成 BOM 采购清单，一键导出高清拼豆纸
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn btn-primary btn-lg">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            免费下载
+                        </a>
+                        <a href="#features" class="btn btn-outline btn-lg">
+                            查看功能
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-target="5" data-suffix="">0</span>
+                            <span class="stat-label">品牌色板</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="500" data-suffix="+">0</span>
+                            <span class="stat-label">色号支持</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="100" data-suffix="×100">0</span>
+                            <span class="stat-label">最大网格</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-shadow"></div>
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="phone-statusbar">
+                                    <span>9:41</span>
+                                    <span>
+                                        <svg viewBox="0 0 24 24" width="14" height="14"><rect x="1" y="6" width="4" height="18" rx="1" fill="white"/><rect x="7" y="8" width="4" height="16" rx="1" fill="white"/><rect x="13" y="3" width="4" height="21" rx="1" fill="white"/><rect x="19" y="1" width="4" height="23" rx="1" fill="white"/></svg>
+                                    </span>
+                                </div>
+                                <div class="phone-app-ui">
+                                    <div class="phone-app-header">
+                                        <span class="phone-app-logo">
+                                            <img src="assets/logo.png" alt="" width="24" height="24">
+                                        </span>
+                                        <span class="phone-app-title">拼豆图纸</span>
+                                    </div>
+                                    <div class="phone-upload-box">
+                                        <div class="phone-upload-icon">
+                                            <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="#FF6B6B" stroke-width="1.5"><rect x="6" y="6" width="36" height="36" rx="6"/><circle cx="18" cy="18" r="4"/><path d="M6 34l10-10 8 8 6-6 12 12"/></svg>
+                                        </div>
+                                        <span>点击上传照片</span>
+                                    </div>
+                                    <div class="phone-canvas-wrap">
+                                        <canvas id="demoCanvas" width="260" height="260"></canvas>
+                                    </div>
+                                    <div class="phone-bottom-bar">
+                                        <div class="phone-brand-pills">
+                                            <span class="phone-pill active">MARD</span>
+                                            <span class="phone-pill">Perler</span>
+                                            <span class="phone-pill">Hama</span>
+                                        </div>
+                                        <div class="phone-bead-count">
+                                            <span class="bead-dot"></span>
+                                            <span id="beadCount">42颗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 核心功能 ============ -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">核心功能</span>
+                <h2 class="section-title">专为拼豆爱好者设计</h2>
+                <p class="section-subtitle">从照片到实体作品，一站式全流程工具</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #FF6B6B; --icon-bg: #FFF0F0">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><rect x="2" y="2" width="44" height="44" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="22" cy="20" r="5" fill="currentColor" opacity="0.25"/><circle cx="36" cy="36" r="7" fill="currentColor" opacity="0.25"/><path d="M16 40 L40 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M28 16 L40 4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.4"/></svg>
+                    </div>
+                    <h3>AI 一键转换</h3>
+                    <p>上传任意照片，AI 自动分析色彩并生成拼豆像素画。宠物、人像、风景、插画通通支持，10×10 到 100×100 网格随心选。</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #A855F7; --icon-bg: #F5F0FF">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><circle cx="24" cy="10" r="5" fill="#FF6B6B"/><circle cx="10" cy="34" r="5" fill="#4ECDC4"/><circle cx="38" cy="34" r="5" fill="#FFE66D"/><circle cx="24" cy="34" r="5" fill="#A855F7"/><circle cx="24" cy="20" r="3.5" fill="currentColor" opacity="0.4"/><line x1="24" y1="15" x2="24" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="15" y1="34" x2="24" y2="20" stroke="currentColor" stroke-width="1"/><line x1="33" y1="34" x2="24" y2="20" stroke="currentColor" stroke-width="1"/><line x1="24" y1="34" x2="24" y2="23" stroke="currentColor" stroke-width="1"/></svg>
+                    </div>
+                    <h3>五大品牌色板</h3>
+                    <p>内置 MARD、Perler、Hama、COCO、曼曼完整色卡。智能匹配最接近的真实拼豆颜色，屏幕上的颜色就是你做出来的颜色。</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #10B981; --icon-bg: #ECFDF5">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><rect x="4" y="8" width="40" height="34" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="16" x2="44" y2="16" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><rect x="12" y="22" width="24" height="2.5" fill="currentColor" opacity="0.25" rx="1"/><rect x="12" y="28" width="18" height="2.5" fill="currentColor" opacity="0.25" rx="1"/><rect x="12" y="34" width="21" height="2.5" fill="currentColor" opacity="0.25" rx="1"/><circle cx="38" cy="27" r="7" fill="currentColor" opacity="0.1"/><text x="35" y="30" font-size="6" fill="currentColor" font-weight="bold" text-anchor="middle">BOM</text></svg>
+                    </div>
+                    <h3>自动 BOM 清单</h3>
+                    <p>图纸生成后自动计算每色珠数。品牌色号 + 颜色名 + 数量一目了然，采购前看一眼就知道买什么，再不用手动数。</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #F59E0B; --icon-bg: #FFFBEB">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><rect x="8" y="4" width="32" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="8" width="24" height="16" fill="currentColor" opacity="0.08" rx="2"/><rect x="16" y="11" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.5"/><rect x="16" y="17" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.7"/><line x1="12" y1="28" x2="36" y2="28" stroke="currentColor" stroke-width="1"/><line x1="12" y1="34" x2="28" y2="34" stroke="currentColor" stroke-width="1"/><line x1="12" y1="40" x2="32" y2="40" stroke="currentColor" stroke-width="1"/><path d="M38 38 L44 44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                    </div>
+                    <h3>高清打印导出</h3>
+                    <p>A4 300DPI 输出，附网格标注、色号对照、用珠统计。同时支持 PNG 图片导出，随手分享到小红书、朋友圈。</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #3B82F6; --icon-bg: #EFF6FF">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><rect x="6" y="6" width="36" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="12" width="6" height="6" fill="currentColor" opacity="0.4" rx="1"/><rect x="22" y="12" width="6" height="6" fill="currentColor" opacity="0.55" rx="1"/><rect x="32" y="12" width="6" height="6" fill="currentColor" opacity="0.25" rx="1"/><rect x="12" y="22" width="6" height="6" fill="currentColor" opacity="0.5" rx="1"/><rect x="22" y="22" width="6" height="6" fill="currentColor" opacity="0.8" rx="1"/><rect x="32" y="22" width="6" height="6" fill="currentColor" opacity="0.35" rx="1"/><rect x="12" y="32" width="6" height="6" fill="currentColor" opacity="0.6" rx="1"/><rect x="22" y="32" width="6" height="6" fill="currentColor" opacity="0.3" rx="1"/><rect x="32" y="32" width="6" height="6" fill="currentColor" opacity="0.65" rx="1"/><circle cx="40" cy="40" r="4" fill="currentColor" opacity="0.15"/><path d="M38 40h4M40 38v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </div>
+                    <h3>像素级精修</h3>
+                    <p>AI 不够准？自由绘制 + 颜色替换 + 区域填充 + 50 步撤销。像用 Photoshop 一样精细调整每一个像素格。</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-glow"></div>
+                    <div class="feature-icon-wrap" style="--icon-color: #EC4899; --icon-bg: #FDF2F8">
+                        <svg viewBox="0 0 48 48" width="32" height="32"><rect x="6" y="12" width="36" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="6" y1="20" x2="42" y2="20" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="currentColor"/><rect x="10" y="24" width="10" height="6" rx="1" fill="currentColor" opacity="0.2"/><rect x="22" y="24" width="14" height="6" rx="1" fill="currentColor" opacity="0.3"/><rect x="10" y="33" width="8" height="4" rx="1" fill="currentColor" opacity="0.4"/><rect x="22" y="33" width="10" height="4" rx="1" fill="currentColor" opacity="0.2"/><circle cx="42" cy="40" r="3" fill="currentColor" opacity="0.25"/></svg>
+                    </div>
+                    <h3>离线管理</h3>
+                    <p>作品存本地，自动分区「制作中」和「已完成」。无需注册、不上传云端，你的创意数据完全私密。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 品牌支持 ============ -->
+    <section class="brands" id="brands">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">品牌支持</span>
+                <h2 class="section-title">覆盖主流拼豆品牌</h2>
+                <p class="section-subtitle">真实色号精准匹配，所见即所得</p>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card reveal">
+                    <div class="brand-visual">
+                        <div class="brand-palette">
+                            <div class="palette-swatch" style="background:#FF4444"></div>
+                            <div class="palette-swatch" style="background:#3366FF"></div>
+                            <div class="palette-swatch" style="background:#FFEE44"></div>
+                            <div class="palette-swatch" style="background:#FF66AA"></div>
+                            <div class="palette-swatch" style="background:#44EE66"></div>
+                            <div class="palette-swatch" style="background:#9944FF"></div>
+                        </div>
+                    </div>
+                    <div class="brand-info">
+                        <h3>MARD</h3>
+                        <span class="brand-badge">国产第一</span>
+                    </div>
+                    <p class="brand-count">291 色</p>
+                    <p class="brand-desc">色数最多、覆盖最广的专业品牌</p>
+                </div>
+
+                <div class="brand-card reveal">
+                    <div class="brand-visual">
+                        <div class="brand-palette">
+                            <div class="palette-swatch" style="background:#FF6B6B"></div>
+                            <div class="palette-swatch" style="background:#4ECDC4"></div>
+                            <div class="palette-swatch" style="background:#FFE66D"></div>
+                            <div class="palette-swatch" style="background:#95E1D3"></div>
+                            <div class="palette-swatch" style="background:#F38181"></div>
+                            <div class="palette-swatch" style="background:#AA96DA"></div>
+                        </div>
+                    </div>
+                    <div class="brand-info">
+                        <h3>Perler</h3>
+                        <span class="brand-badge">北美霸主</span>
+                    </div>
+                    <p class="brand-count">117 色</p>
+                    <p class="brand-desc">全球知名度最高，品质稳定</p>
+                </div>
+
+                <div class="brand-card reveal">
+                    <div class="brand-visual">
+                        <div class="brand-palette">
+                            <div class="palette-swatch" style="background:#FF4500"></div>
+                            <div class="palette-swatch" style="background:#1E90FF"></div>
+                            <div class="palette-swatch" style="background:#32CD32"></div>
+                            <div class="palette-swatch" style="background:#FFD700"></div>
+                            <div class="palette-swatch" style="background:#FF1493"></div>
+                            <div class="palette-swatch" style="background:#00CED1"></div>
+                        </div>
+                    </div>
+                    <div class="brand-info">
+                        <h3>Artkal</h3>
+                        <span class="brand-badge">专业级</span>
+                    </div>
+                    <p class="brand-count">200+ 色</p>
+                    <p class="brand-desc">S 系列 & M 系列，精细配色</p>
+                </div>
+
+                <div class="brand-card reveal">
+                    <div class="brand-visual">
+                        <div class="brand-palette">
+                            <div class="palette-swatch" style="background:#DC143C"></div>
+                            <div class="palette-swatch" style="background:#4169E1"></div>
+                            <div class="palette-swatch" style="background:#00CED1"></div>
+                            <div class="palette-swatch" style="background:#FF6347"></div>
+                            <div class="palette-swatch" style="background:#9370DB"></div>
+                            <div class="palette-swatch" style="background:#98FB98"></div>
+                        </div>
+                    </div>
+                    <div class="brand-info">
+                        <h3>Hama</h3>
+                        <span class="brand-badge">欧洲经典</span>
+                    </div>
+                    <p class="brand-count">89 色</p>
+                    <p class="brand-desc">欧洲主流品牌，日系爱好者首选</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 使用场景 ============ -->
+    <section class="scenes" id="scenes">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">使用场景</span>
+                <h2 class="section-title">谁在用拼豆图纸？</h2>
+                <p class="section-subtitle">从入门玩家到专业手作人，每个人都能找到自己的用法</p>
+            </div>
+            <div class="scenes-grid">
+                <div class="scene-card reveal">
+                    <div class="scene-icon">🎨</div>
+                    <h3>拼豆爱好者</h3>
+                    <p>把喜欢的角色、宠物、风景变成拼豆作品，一套工具搞定所有创作。</p>
+                </div>
+                <div class="scene-card reveal">
+                    <div class="scene-icon">👨‍👩‍👧‍👦</div>
+                    <h3>亲子手工</h3>
+                    <p>把孩子的画变成拼豆玩具，最好的亲子时光，锻炼创造力和动手能力。</p>
+                </div>
+                <div class="scene-card reveal">
+                    <div class="scene-icon">🛍️</div>
+                    <h3>手作卖家</h3>
+                    <p>把 IP 角色或客户照片变成拼豆商品。BOM 清单让采购效率翻倍。</p>
+                </div>
+                <div class="scene-card reveal">
+                    <div class="scene-icon">🏫</div>
+                    <h3>美术教学</h3>
+                    <p>美术课、社团课的最佳辅助工具，学生零基础也能快速上手。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 为什么选择我们 ============ -->
+    <section class="compare" id="compare">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">为什么选我们</span>
+                <h2 class="section-title">不仅仅是拼豆工具</h2>
+                <p class="section-subtitle">我们做了竞品做不到的事</p>
+            </div>
+            <div class="compare-cards">
+                <div class="compare-card reveal">
+                    <div class="compare-icon">🧠</div>
+                    <h3>真正的 AI 转换</h3>
+                    <p>不是简单的像素化滤镜。我们的 AI 会识别照片中的主体、背景、色彩层次，智能优化转换效果，让成品更像原图。</p>
+                </div>
+                <div class="compare-card reveal">
+                    <div class="compare-icon">🎯</div>
+                    <h3>五品牌全链路</h3>
+                    <p>市面上其他工具最多支持 2-3 个品牌。我们覆盖 MARD、Perler、Hama、COCO、曼曼五大品牌，从转换到采购一气呵成。</p>
+                </div>
+                <div class="compare-card reveal">
+                    <div class="compare-icon">📋</div>
+                    <h3>BOM 采购清单</h3>
+                    <p>唯一一款免费提供自动 BOM 清单的拼豆 App。颜色名、品牌色号、所需数量一字排开，直接对着买。</p>
+                </div>
+                <div class="compare-card reveal">
+                    <div class="compare-icon">🔒</div>
+                    <h3>离线 + 隐私</h3>
+                    <p>AI 转换在设备端完成，照片和作品不上传任何服务器。不需要注册账户，你的创意 100% 属于你。</p>
+                </div>
+                <div class="compare-card reveal">
+                    <div class="compare-icon">⚡</div>
+                    <h3>原生流畅体验</h3>
+                    <p>不是网页套壳。纯原生 iOS App，启动快、操作流畅、完美适配 iPhone 和 iPad，离线也能用。</p>
+                </div>
+                <div class="compare-card reveal">
+                    <div class="compare-icon">🔄</div>
+                    <h3>持续更新迭代</h3>
+                    <p>每两周一个版本。新品牌色板、新功能、体验优化，永远不会是一个「发布后就没人管」的 App。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 使用流程 ============ -->
+    <section class="workflow" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">使用流程</span>
+                <h2 class="section-title">简单四步，完成作品</h2>
+                <p class="section-subtitle">从照片到实体拼豆，每个环节都帮你考虑好了</p>
+            </div>
+            <div class="workflow-steps">
+                <div class="workflow-step reveal">
+                    <div class="step-number">
+                        <span>1</span>
+                        <div class="step-ring"></div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-emoji">📸</div>
+                        <div class="step-body">
+                            <h3>上传照片</h3>
+                            <p>从相册选择或现场拍摄。支持宠物、人像、风景、插画等各种类型，AI 都能处理。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-step reveal">
+                    <div class="step-number">
+                        <span>2</span>
+                        <div class="step-ring"></div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-emoji">🎨</div>
+                        <div class="step-body">
+                            <h3>选品牌和尺寸</h3>
+                            <p>选择你手头的拼豆品牌（MARD/Perler/Hama 等），设定网格尺寸，AI 会自动匹配对应色板。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-step reveal">
+                    <div class="step-number">
+                        <span>3</span>
+                        <div class="step-ring"></div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-emoji">✏️</div>
+                        <div class="step-body">
+                            <h3>AI 转换 + 精修</h3>
+                            <p>一键生成不是终点。不满意可以用编辑工具逐格调整颜色、替换像素，50 步撤销让你放心试。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-step reveal">
+                    <div class="step-number">
+                        <span>4</span>
+                        <div class="step-ring"></div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-emoji">🖨️</div>
+                        <div class="step-body">
+                            <h3>打印制作</h3>
+                            <p>查看 BOM 清单采购珠子，导出 300DPI PDF 打印，或者直接对着手机屏幕拼——开始动手吧。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 用户评价 ============ -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">用户评价</span>
+                <h2 class="section-title">他们都在用</h2>
+                <p class="section-subtitle">来自 App Store 的真实用户反馈</p>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card reveal">
+                    <div class="testi-stars">★ ★ ★ ★ ★</div>
+                    <p class="testi-text">"AI 转换效果太惊艳了！把我家猫的照片转成拼豆图纸，颜色匹配非常准，做出来跟照片一模一样。"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">L</div>
+                        <div>
+                            <div class="testi-name">Lily</div>
+                            <div class="testi-role">拼豆爱好者</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="testi-stars">★ ★ ★ ★ ★</div>
+                    <p class="testi-text">"之前用其他工具要手动数色号，太痛苦了。这个 App 自动生成 BOM 清单，买珠子直接对着买，省了超多时间。"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">M</div>
+                        <div>
+                            <div class="testi-name">手工卖家阿明</div>
+                            <div class="testi-role">手作卖家</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="testi-stars">★ ★ ★ ★ ★</div>
+                    <p class="testi-text">"给孩子用特别合适，把他的画导入进去，一会就做好一个钥匙扣。亲子活动强烈推荐！"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">W</div>
+                        <div>
+                            <div class="testi-name">王妈妈</div>
+                            <div class="testi-role">亲子用户</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 常见问题 ============ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">常见问题</span>
+                <h2 class="section-title">你可能想问</h2>
+                <p class="section-subtitle">关于拼豆图纸的常见疑问</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>拼豆图纸是免费的吗？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>基础功能完全免费，包括 AI 转换、品牌色板匹配、BOM 清单和基础导出。</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>支持哪些品牌的拼豆？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>目前支持 MARD、Perler、Hama、COCO、曼曼五大品牌，覆盖超过 500 种颜色。我们也在持续增加更多品牌支持。</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>AI 转换需要联网吗？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>AI 转换在设备端完成，不需要联网！照片和作品数据完全保存在你的手机上，不上传任何服务器，隐私 100% 安全。</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>导出的图纸怎么用？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>导出 PDF 后可以直接打印在 A4 纸上，附带的网格标注和色号对照让你可以照着图纸一颗一颗拼。也可以直接对着手机屏幕拼，省去打印步骤。</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        <span>支持 iPad 吗？</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>支持！拼豆图纸同时适配 iPhone 和 iPad，在 iPad 的大屏幕上编辑像素画更加舒适。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 下载区域 ============ -->
+    <section class="download" id="download">
+        <div class="download-bg-pattern"></div>
+        <div class="container">
+            <div class="download-card">
+                <div class="download-text">
+                    <h2>开始你的<br>拼豆创作之旅</h2>
+                    <p>免费下载，无需注册。<br>支持 iPhone 和 iPad。</p>
+                    <div class="download-buttons">
+                        <a href="#" class="download-btn download-btn-coming">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.15 1.26-2.13 3.72.03 2.99 2.53 3.99 2.56 4.01-.03.08-.42 1.44-1.38 2.84L18.71 19.5zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            <div class="download-btn-text">
+                                <small>即将上架</small>
+                                <strong>App Store</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download-qr">
+                    <div class="qr-card">
+                        <div class="qr-code-real">
+                            <img src="assets/qrcode.png" alt="扫码下载拼豆图纸" class="qr-img" />
+                            <div class="qr-coming-badge">敬请期待</div>
+                        </div>
+                        <p>扫码下载</p>
+                        <p class="qr-sub">即将上架 App Store</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ Footer ============ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/logo.png" alt="拼豆图纸" class="footer-logo-img" width="36" height="36">
+                        <span>拼豆图纸</span>
+                    </div>
+                    <p class="footer-desc">AI 驱动的拼豆图纸生成工具，<br>让每个人的创意变成现实。</p>
+                </div>
+                <div class="footer-links">
+                    <h4>产品</h4>
+                    <a href="#features">核心功能</a>
+                    <a href="#brands">品牌支持</a>
+                    <a href="#scenes">使用场景</a>
+                    <a href="#download">下载 App</a>
+                </div>
+                <div class="footer-links">
+                    <h4>支持</h4>
+                    <a href="#">联系我们</a>
+                    <a href="#">隐私政策</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 拼豆图纸. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+
+    <!-- 回到顶部按钮 -->
+    <button class="back-to-top" id="backToTop" aria-label="回到顶部">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- 浮动下载按钮 -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="#download" class="floating-cta-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            免费下载
+        </a>
+    </div>
+</body>
+</html>

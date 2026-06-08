@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拼豆图纸用户协议</title>
+  <style>
+    :root {
+      --c-900: #0C4A6E;
+      --c-700: #0369A1;
+      --c-500: #0EA5E9;
+      --c-400: #38BDF8;
+      --c-200: #BAE6FD;
+      --c-100: #E0F2FE;
+      --c-50:  #F0F9FF;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --radius: 14px;
+      --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 24px rgba(0,0,0,.04);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(160deg, #F0F9FF 0%, #E0F2FE 40%, #F8FAFC 100%);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景装饰 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -180px; right: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(14,165,233,.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -140px; left: -100px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(6,182,212,.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dot-pattern {
+      position: fixed; inset:0; pointer-events:none; z-index:0;
+      background-image: radial-gradient(rgba(14,165,233,.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* 容器 */
+    .wrapper { position:relative; z-index:1; max-width:760px; margin:0 auto; padding:48px 20px 80px; }
+
+    /* 卡片 */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 48px 44px;
+      border: 1px solid rgba(14,165,233,.08);
+    }
+
+    /* 头部 */
+    .header { text-align:center; margin-bottom:40px; }
+    .header .icon {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:56px; height:56px; border-radius:16px;
+      background: linear-gradient(135deg, var(--c-500), var(--c-400));
+      margin-bottom:16px;
+    }
+    .header .icon svg { width:28px; height:28px; fill:#fff; }
+    .header h1 { font-size:28px; font-weight:800; letter-spacing:-0.01em; color:var(--c-900); }
+    .header .meta { margin-top:12px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; }
+    .header .meta span {
+      font-size:13px; color:var(--text-muted);
+      background:var(--c-50); padding:4px 14px; border-radius:20px;
+      border:1px solid var(--c-200);
+    }
+
+    /* 目录 */
+    .toc {
+      display:grid; grid-template-columns:1fr 1fr; gap:8px;
+      margin-bottom:40px; padding:20px;
+      background:var(--c-50); border-radius:12px;
+      border:1px solid var(--c-200);
+    }
+    .toc a {
+      display:flex; align-items:center; gap:8px;
+      font-size:13px; color:var(--c-700); text-decoration:none;
+      padding:6px 10px; border-radius:8px; transition:all .15s;
+    }
+    .toc a:hover { background:var(--c-100); color:var(--c-900); }
+    .toc .toc-num {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:22px; height:22px; border-radius:6px;
+      background:linear-gradient(135deg, var(--c-500), var(--c-400));
+      color:#fff; font-size:11px; font-weight:700; flex-shrink:0;
+    }
+
+    /* 章节 */
+    .section { margin-bottom:36px; }
+    .section-header {
+      display:flex; align-items:flex-start; gap:14px; margin-bottom:14px;
+    }
+    .section-num {
+      flex-shrink:0;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:12px;
+      background:linear-gradient(135deg, var(--c-500), var(--c-400));
+      color:#fff; font-size:16px; font-weight:800;
+    }
+    .section-header h2 {
+      font-size:19px; font-weight:700; color:var(--c-900);
+      line-height:40px;
+    }
+
+    .section p {
+      font-size:15px; color:var(--text); margin-bottom:10px; padding-left:54px;
+    }
+    .section p strong { color:var(--c-900); }
+
+    /* 子级列表 */
+    .sub-list { padding-left:54px; margin-bottom:10px; }
+    .sub-list li {
+      list-style:none; font-size:14px; color:var(--text);
+      padding:2px 0 2px 22px; position:relative;
+    }
+    .sub-list li::before {
+      content:''; position:absolute; left:0; top:12px;
+      width:6px; height:6px; border-radius:50%;
+      background:var(--c-400);
+    }
+    .sub-list li strong { color:var(--c-900); }
+
+    /* 重点条款标签 */
+    .highlight-tag {
+      display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px;
+      background:linear-gradient(135deg, var(--c-500), var(--c-400));
+      color:#fff; padding:1px 8px; border-radius:10px; margin-right:6px;
+      vertical-align:middle;
+    }
+
+    /* 联系卡片 */
+    .contact-card {
+      margin-top:36px; padding:28px 32px;
+      background:linear-gradient(135deg, var(--c-50), var(--c-100));
+      border-radius:12px; border:1px solid var(--c-200);
+      text-align:center;
+    }
+    .contact-card h3 { font-size:16px; font-weight:700; color:var(--c-900); margin-bottom:8px; }
+    .contact-card .email {
+      display:inline-block; font-size:18px; font-weight:700;
+      color:var(--c-500); text-decoration:none;
+      padding:4px 0; border-bottom:2px dashed var(--c-400);
+    }
+
+    /* 返回顶部 */
+    #backToTop {
+      position:fixed; bottom:32px; right:32px; z-index:99;
+      width:44px; height:44px; border-radius:50%;
+      background:linear-gradient(135deg, var(--c-500), var(--c-400));
+      color:#fff; border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(14,165,233,.25);
+      opacity:0; transform:translateY(12px);
+      transition:opacity .25s, transform .25s;
+      pointer-events:none; font-size:18px;
+    }
+    #backToTop.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
+    #backToTop:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(14,165,233,.35); }
+
+    /* 响应式 */
+    @media (max-width:640px) {
+      .wrapper { padding:24px 12px 60px; }
+      .card { padding:28px 20px; }
+      .header h1 { font-size:23px; }
+      .toc { grid-template-columns:1fr; }
+      .section p { padding-left:0; }
+      .section-num { width:32px; height:32px; font-size:14px; border-radius:10px; }
+      .section-header h2 { font-size:17px; line-height:32px; }
+      .sub-list { padding-left:0; }
+      #backToTop { bottom:20px; right:16px; width:38px; height:38px; }
+    }
+  </style>
+</head>
+<body>
+<div class="dot-pattern"></div>
+
+<div class="wrapper">
+  <div class="card">
+
+    <!-- 头部 -->
+    <div class="header">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zM8 13h8v2H8v-2zm0 4h8v2H8v-2zm0-8h3v2H8V9z"/></svg>
+      </div>
+      <h1>拼豆图纸用户协议</h1>
+      <div class="meta">
+        <span>生效日期：2026年06月08日</span>
+        <span>版本：v1.0</span>
+      </div>
+    </div>
+
+    <!-- 目录 -->
+    <div class="toc">
+      <a href="#s1"><span class="toc-num">一</span> 协议内容及确认接受</a>
+      <a href="#s2"><span class="toc-num">二</span> 产品与服务</a>
+      <a href="#s3"><span class="toc-num">三</span> 知识产权</a>
+      <a href="#s4"><span class="toc-num">四</span> 个人信息和隐私保护</a>
+      <a href="#s5"><span class="toc-num">五</span> 服务的变更、中断和终止</a>
+      <a href="#s6"><span class="toc-num">六</span> 法律责任声明</a>
+      <a href="#s7"><span class="toc-num">七</span> 违约处理</a>
+      <a href="#s8"><span class="toc-num">八</span> 其他条款</a>
+    </div>
+
+    <!-- 一、协议内容及确认接受 -->
+    <div class="section" id="s1">
+      <div class="section-header">
+        <span class="section-num">一</span>
+        <h2>协议内容及确认接受</h2>
+      </div>
+      <p>1.1 本协议内容包括本协议正文、<strong>《拼豆图纸用户隐私保护政策》</strong>及我们已经在应用发布的或将来可能发布的各类规则（以下合称<strong>"有关规则"</strong>）。《拼豆图纸用户隐私保护政策》及所有有关规则为本协议不可分割的组成部分，与本协议正文具有同等法律效力，一并构成您使用拼豆图纸及本服务的完整协议（以下简称<strong>"本协议"</strong>）。除另行明确声明外，任何我们就应用提供的服务均受本协议约束。</p>
+      <p>1.2 您应当在使用本服务之前认真阅读本协议全部内容。如您对协议有任何疑问的，可向我们进行咨询。<strong>如果您对本协议或任何有关规则的内容表示异议，您可以选择不使用本服务。只要您使用本服务，则本协议即对您产生约束，届时您不应以未阅读本协议的内容或者未获得我们对您问询的解答等理由，主张本协议无效，或要求撤销本协议。</strong></p>
+      <p><strong>1.3 您承诺接受并遵守本协议及所有有关规则的约定。如果您不同意本协议或任何有关规则的约定，您应立即停止激活程序或停止使用本服务。</strong></p>
+      <p>1.4 我们有权根据法律法规、国家有权机关及公司经营的需要不时地修改、补充本协议及/或任何有关规则，并将<strong>通过在我们移动端、网站上发出更新版本或APP端推送通知、提示或以其他适当方式提醒您相关内容的更新。如您不同意相关变更，您可以选择停止使用本服务。如您继续使用本服务的，即表示您接受修订后的协议和有关规则。</strong></p>
+    </div>
+
+    <!-- 二、产品与服务 -->
+    <div class="section" id="s2">
+      <div class="section-header">
+        <span class="section-num">二</span>
+        <h2>产品与服务</h2>
+      </div>
+      <p><strong>2.1 请您留意识别安装程序的来源，您应从合法的渠道下载拼豆图纸产品至其合法拥有的终端设备中。同时，我们提示您：</strong></p>
+      <p>2.1.1 拼豆图纸运营方给予您一项个人的、不可转让及非排他性的许可以使用拼豆图纸产品及服务，您可以非商业目的在终端设备上安装、使用拼豆图纸产品，拼豆图纸运营方也保留在任何必要情形下收回该授权的权利。但除非得到特别的授权，否则您不能以任何形式改编、复制或交易拼豆图纸产品。</p>
+      <p>2.1.2 如果您从未经拼豆图纸运营方授权的第三方获取拼豆图纸产品或与拼豆图纸产品名称相同的安装程序，拼豆图纸运营方无法保证该产品能够正常使用，同时拼豆图纸运营方不对因此造成的任何损失负责。</p>
+      <p>2.2 一旦您在您的终端设备中打开并进入拼豆图纸产品，即视为使用拼豆图纸产品和服务。为充分实现拼豆图纸产品及服务的全部功能，您可能需要将终端设备联网。</p>
+      <p>2.3 为了保证拼豆图纸产品和服务的安全性和功能的一致性，拼豆图纸运营方有权无需向您做特别通知而对软件进行更新，或者对软件的部分功能效果进行改变或限制。</p>
+      <p>2.4 拼豆图纸软件新版本发布后，旧版本的软件可能无法使用。拼豆图纸运营方不保证旧版本软件继续可用，请您随时核对并下载最新版本。</p>
+      <p><strong>2.5 您理解并同意：为了提供有效的服务，拼豆图纸会利用您终端设备的处理器和带宽等资源。拼豆图纸使用过程中可能会产生数据流量费用，您需自行向运营商了解相关资费信息，并自行承担相关费用。</strong></p>
+      <p><strong>2.6 您在使用本服务的过程中，需要提供一些必要的信息，如照片导入功能需要您授权访问手机相册等，如若拒绝则无法使用对应功能或在使用的过程中受到限制。</strong></p>
+      <p>2.7 拼豆图纸运营方将采取合适的安全措施及技术手段保护您的个人信息及其他数据安全。对个人信息及与个人信息相关的数据资料的存储，拼豆图纸运营方严格按照法律规定的执行方式及期限执行，对不同等级的个人信息按照其对应的存储期限进行存储。</p>
+      <p><strong>2.8 您在使用本软件及服务时，须自行承担如下拼豆图纸运营方不可掌控的风险内容，包括但不限于：</strong></p>
+      <p>2.8.1 由于不可抗拒因素可能引起的个人信息丢失、泄漏等风险；</p>
+      <p>2.8.2 您必须选择与所安装终端设备匹配的软件版本，否则，由于软件与终端设备型号不相匹配所导致的任何问题或损害，均由您自行承担；</p>
+      <p>2.8.3 您在使用本软件访问第三方网站时，因第三方网站及相关内容所可能导致的风险，由您自行承担；</p>
+      <p>2.8.4 您发布的内容被他人转发、分享，因此等传播可能带来的风险和责任；</p>
+      <p>2.8.5 由于无线网络信号不稳定、无线网络带宽小等原因，所引起的登录失败、资料同步不完整、页面打开速度慢等风险。</p>
+      <p>2.9 您理解并同意，拼豆图纸运营方将会尽其商业上的合理努力保障您于本软件及服务中的数据存储安全，但是，拼豆图纸运营方并不能就此完全保证，包括但不限于以下情形：</p>
+      <p>2.9.1 拼豆图纸运营方不对您在本软件及服务中相关数据的删除或存储失败负责；</p>
+      <p>2.9.2 拼豆图纸将依照相关法律法规的规定对您在使用拼豆图纸服务过程中所产生的数据进行存储保护；如果您停止使用本软件及服务或服务被终止或取消，拼豆图纸运营方可以在保存期限（如有）届满后从服务器上永久地删除您的数据。服务停止、终止或取消后，拼豆图纸运营方没有义务向您返还数据。</p>
+      <p><strong>2.10 请您注意勿在使用拼豆图纸产品和服务时随意透露您或他人的各类财产帐户、银行卡、信用卡、第三方支付账户及对应密码等重要资料，否则由此带来的任何损失将由您自行承担。</strong></p>
+      <p>2.11 您理解并同意，拼豆图纸运营方有权决定将本软件作商业用途，包括但不限于开发、使用本软件的部分服务为第三方提供推广服务等。在推广的过程中，拼豆图纸运营方将严格按照相关法规及拼豆图纸运营方针对拼豆图纸发布的规范保护您的个人信息，同时间，您亦可以根据系统设置选择屏蔽、拒绝接收相关推广信息。</p>
+      <p><strong>2.12 您在使用拼豆图纸产品和服务时，应当遵守中华人民共和国的法律。您不得利用拼豆图纸运营方的产品和服务从事违反相关法律法规、政策的行为并应遵守拼豆图纸产品内发布或更新的规则规范。您不得通过头像、姓名、昵称、网址、自述等个人资料冒充他人身份，无论是否发布信息。如果遇到违反情形，拼豆图纸运营方保留收回相关账号的权利。</strong></p>
+      <p><strong>2.13 您在拼豆图纸发表的内容仅表明您个人的立场和观点，并不代表拼豆图纸运营方的立场或观点。作为内容的发表者，您需自行对所发表内容负责，因所发表内容引发的一切纠纷，由该内容的发表者承担全部法律及连带责任。</strong></p>
+      <p>2.14 您不得使用未经拼豆图纸运营方授权或许可的任何插件、"外挂"或第三方工具对拼豆图纸产品和服务的正常运行进行干扰、破坏、修改或施加其他影响。</p>
+      <p>2.15 您不得利用或针对拼豆图纸产品进行任何危害计算机网络安全的行为，包括但不限于：未经许可使用拼豆图纸的相关数据或在未经许可的情形下进入拼豆图纸的相关服务器/帐户；未经许可企图探查、扫描、测试拼豆图纸产品系统或网络的弱点或实施其它破坏网络安全的行为；企图干涉、破坏拼豆图纸产品系统或网站的正常运行，故意传播恶意程序或病毒以及其他破坏干扰正常网络信息服务的行为；伪造TCP/IP数据包名称或部分名称。</p>
+      <p>2.16 未经拼豆图纸运营方许可，您不得在拼豆图纸产品中进行任何诸如发布广告、销售商品等商业行为。</p>
+      <p>2.17 <strong>拼豆图纸运营方致力营造文明、理性、友善、高质量的平台氛围。您不得利用拼豆图纸运营方的产品和服务制作、复制、发表、传播下列信息（包括但不限于通过发布评论、修改昵称等形式）：</strong></p>
+      <p><strong>2.17.1 发布、传送、传播、储存国家法律法规禁止的内容：</strong></p>
+      <div class="sub-list">
+        <li>（1）反对宪法确定的基本原则的；</li>
+        <li>（2）危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；</li>
+        <li>（3）损害国家荣誉和利益的；</li>
+        <li>（4）煽动民族仇恨、民族歧视，破坏民族团结的；</li>
+        <li>（5）破坏国家宗教政策，宣扬邪教和迷信的；</li>
+        <li>（6）散布谣言，扰乱社会秩序、破坏社会稳定的；</li>
+        <li>（7）散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；</li>
+        <li>（8）侮辱或者诽谤他人，侵害他人合法权益的；</li>
+        <li>（9）煽动非法集会、结社、游行、示威、聚众扰乱社会秩序；</li>
+        <li>（10）以非法民间组织名义活动的；</li>
+        <li>（11）含有法律、行政法规禁止的其他内容的。</li>
+      </div>
+      <p><strong>2.17.2 发布、传送、传播、储存侵害他人名誉权、肖像权、知识产权、商业秘密等合法权益的内容的；</strong></p>
+      <p><strong>2.17.3 未经他人同意或授权，擅自发布涉及他人隐私、个人信息或资料信息的；</strong></p>
+      <p><strong>2.17.4 发表、传送、传播骚扰、广告信息、过度营销信息及垃圾信息或其他同类信息的；</strong></p>
+      <p><strong>2.17.5 其他违反法律法规、政策及公序良俗、社会公德或干扰拼豆图纸正常运营、侵犯您或其他用户及第三方合法权益的信息。</strong></p>
+      <p><strong>如您违反上述条款，拼豆图纸运营方将视情况采取拒绝发布、删除评论、短期禁止发言直至永久关闭账号等管理措施，涉嫌违法犯罪的内容将被保存在案，相关情况及资料信息将被向有关政府部门如实报告。</strong></p>
+      <p>2.18 拼豆图纸运营方将完善公众举报平台，欢迎您监督举报各类不法传播活动和违法有害信息，以共同营造清朗的网络空间。</p>
+    </div>
+
+    <!-- 三、知识产权 -->
+    <div class="section" id="s3">
+      <div class="section-header">
+        <span class="section-num">三</span>
+        <h2>知识产权</h2>
+      </div>
+      <p>3.1 拼豆图纸运营方是拼豆图纸产品的知识产权权利人。拼豆图纸的一切著作权、商标权、专利权、商业秘密等知识产权，以及与拼豆图纸相关的所有信息内容（包括但不限于文字、图片、视频、音频、界面设计、版权框架等）均受中华人民共和国法律法规和相应国际条约的保护，拼豆图纸运营方享有上述知识产权（相关权利人依照法律规定应当享有的权利除外）。</p>
+      <p><strong>3.2 您应保证，在使用拼豆图纸产品和服务时上传的文字、图片、音频、视频以及其他信息不侵犯任何第三方知识产权。否则，拼豆图纸运营方有权移除该侵权信息，并对此不负任何责任。如前述第三方提出权利主张，您应自行承担责任。</strong></p>
+      <p><strong>3.3 您在使用拼豆图纸产品及服务过程中上传、发布的全部内容，均不会因此上传、发布行为发生知识产权、肖像权等权利的转移。与此同时，您理解并同意，您在使用拼豆图纸产品和服务时将相关文字、图片等内容发表、上传于拼豆图纸后，您同意将该等内容信息对拼豆图纸运营方进行免费、非独占性、永久性和可转让的授权，拼豆图纸可以展示、推广等符合法律规定的方式使用前述内容。</strong></p>
+      <p>3.4 拼豆图纸产品和服务中可能涉及到第三方知识产权，而该第三方对于您在拼豆图纸产品和服务中使用相关知识产权有要求时，拼豆图纸运营方将以适当形式告知您该要求，您应当一并遵守。</p>
+      <p>3.5 未经相关权利人同意，您不得对拼豆图纸产品和服务涉及的相关网页、应用、软件等产品进行反向工程、反向汇编、反向编译等；也不得为任何商业或非商业目的自行或许可任何第三方实施、利用、转让上述知识产权。</p>
+      <p>3.6 拼豆图纸产品和服务中所包含内容的知识产权均受到法律保护，未经拼豆图纸运营方、您或相关权利人书面许可，任何人不得以任何形式进行使用或创造相关衍生作品。</p>
+    </div>
+
+    <!-- 四、个人信息和隐私保护 -->
+    <div class="section" id="s4">
+      <div class="section-header">
+        <span class="section-num">四</span>
+        <h2>个人信息和隐私保护</h2>
+      </div>
+      <p>4.1 保护您的个人信息是拼豆图纸运营方的一项基本原则，拼豆图纸运营方将按照本协议及拼豆图纸运营方公布的<strong style="color:#0EA5E9;">《拼豆图纸隐私政策》</strong>的规定收集、使用、存储和分享您的个人信息。</p>
+      <p><strong>4.2 维护软件安全与正常使用是拼豆图纸运营方与您的共同责任，拼豆图纸运营方将按照行业标准审慎采取必要措施保护您的设备信息和数据安全，但是同时，您应了解并认可拼豆图纸运营方无法就此向您提供完全的保证。</strong></p>
+      <p><strong>4.3 您理解并同意，拼豆图纸同大多数互联网软件一样，可能会受到多种因素的影响；也可能被他人非法利用信息资料等各种安全问题侵扰。在此，我们特别提示您，在任何情况下，您都不应轻信借款、索要密码或任何其他涉及财产及个人身份信息的网络信息。</strong></p>
+      <p>4.4 拼豆图纸运营方将运用各种安全技术和程序建立完善的管理制度来保护您的个人信息，以免遭受未经授权的访问、使用或披露。</p>
+      <p>4.5 拼豆图纸运营方不会将您的个人信息转移或披露给任何非关联的第三方，除非：</p>
+      <div class="sub-list">
+        <li>（1）获得您明确同意或基于您的主动选择；</li>
+        <li>（2）基于法律法规规定的披露：在法律、法律程序、诉讼或政府主管部门的强制性要求。</li>
+      </div>
+      <p><strong>4.6 根据法律法规规定，共享、转让经去标识化处理的个人信息，且确保数据接收方无法复原并重新识别个人信息主体的，不属于个人信息的对外共享、转让及公开披露行为。</strong></p>
+      <p><strong>4.7 在以下情况下，拼豆图纸运营方可能会使用您的个人信息：</strong></p>
+      <div class="sub-list">
+        <li><strong>（1）在进行促销或抽奖时，拼豆图纸运营方可能会与赞助商或合作伙伴共享您的个人信息，在这些情况下拼豆图纸运营方会在发送您信息之前进行提示；</strong></li>
+        <li><strong>（2）拼豆图纸运营方可能会与第三方合作向您提供相关的网络服务，在此情况下，拼豆图纸运营方将要求该第三方承担与拼豆图纸运营方同等的保护您隐私的责任；</strong></li>
+        <li><strong>（3）在经过去标识化处理无法识别个人信息主体的前提下，拼豆图纸运营方可能会基于产品提升等需要对整个数据库进行分析并对数据库进行商业上的利用。</strong></li>
+      </div>
+    </div>
+
+    <!-- 五、服务的变更、中断和终止 -->
+    <div class="section" id="s5">
+      <div class="section-header">
+        <span class="section-num">五</span>
+        <h2>服务的变更、中断和终止</h2>
+      </div>
+      <p><strong>5.1 您理解并同意，拼豆图纸运营方提供的拼豆图纸产品和服务是按照现有技术和条件所能达到的现状提供的。拼豆图纸运营方会尽最大努力向您提供服务，确保服务的连贯性和安全性；但拼豆图纸运营方不能随时预见和防范技术以及其他风险。</strong></p>
+      <p><strong>5.2 您理解并同意，拼豆图纸运营方为了服务整体运营的需要，有权在不事先通知您的情况下修改、中断、中止或终止拼豆图纸产品内的各项服务，而无须向您或第三方负责或承担任何赔偿责任。</strong></p>
+    </div>
+
+    <!-- 六、法律责任声明 -->
+    <div class="section" id="s6">
+      <div class="section-header">
+        <span class="section-num">六</span>
+        <h2>法律责任声明</h2>
+      </div>
+      <p><strong>6.1 因客观情况及技术所限，请您理解：拼豆图纸运营方将尽可能提升服务能力以向您提供更好的服务，如产品中出现任何程序错误，拼豆图纸运营方也将在发现相关程序错误的第一时间进行更正，但拼豆图纸运营方无法向您保证产品和服务完全适合您的使用要求；无法向您保证产品或服务不受干扰或不出现任何程序错误。</strong></p>
+      <p>6.2 对违反有关法律法规或本协议规定的行为，拼豆图纸运营方将依法律规定及上述规则等加以合理判断进行处理，对违法违规的任何人士采取适当的法律行动，并依据法律法规保存有关信息并向有关部门报告等。</p>
+      <p><strong>6.3 拼豆图纸产品中可能包含由您分享/上传的或拼豆图纸运营方以各种合法方式获取的外部网络内容或服务链接。关于您在这些外部服务中所产生的权利和义务，除非另有约定，拼豆图纸运营方无需向您或第三方的服务内容与效果承担任何责任。</strong></p>
+    </div>
+
+    <!-- 七、违约处理 -->
+    <div class="section" id="s7">
+      <div class="section-header">
+        <span class="section-num">七</span>
+        <h2>违约处理</h2>
+      </div>
+      <p><strong>7.1 您因违反国家法律法规或本协议的约定，或您侵害他人任何权利因而衍生或导致任何第三人向拼豆图纸运营方提出任何索赔或请求，包括但不限于诉讼费用、律师费用、差旅费用、和解金额、罚款或生效法律文书中规定的损害赔偿金额、软件使用费等而给拼豆图纸运营方造成损失的，您应赔偿拼豆图纸运营方因此而遭受的损失，并消除影响。</strong></p>
+      <p><strong>7.2 您理解并同意，拼豆图纸有权依合理判断对违反有关法律法规或本协议规定的行为进行处罚。如果拼豆图纸运营方发现或收到他人举报或投诉您存在违反本协议约定行为的，拼豆图纸运营方有权对相关涉嫌违反法律法规或本协议约定的内容进行删除、屏蔽，并可视行为情节轻重对违规账号处以包括但不限于警告、限制或禁止使用部分或全部功能、账号封禁直至注销的处罚，并有权公告处理结果。</strong></p>
+    </div>
+
+    <!-- 八、其他条款 -->
+    <div class="section" id="s8">
+      <div class="section-header">
+        <span class="section-num">八</span>
+        <h2>其他条款</h2>
+      </div>
+      <p>8.1 本协议可能因国家政策、产品以及履行环境发生变化而进行修改，拼豆图纸运营方有权在必要时变更本协议条款，并在拼豆图纸运营方及拼豆图纸产品的相关页面公布最新版本的协议条款供您查阅。<strong>本协议条款变更后，如果您不接受变更后的协议，您应当停止使用拼豆图纸产品和服务。如对更新的内容有疑问您同样均可通过发送邮件至</strong><strong style="color:#0EA5E9;">pindou888@outlook.com</strong><strong>的方式与我们联系。</strong></p>
+      <p>8.2 本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。本协议之任何规定无论因任何原因部分无效或不可执行，则这些条款将尽可能接近本协议原条文意旨重新解析，且本协议其它规定仍应具有完整的效力及效果。</p>
+      <p><strong>8.3 若您因本协议项下的产品及服务与拼豆图纸运营方发生争议的，您可以优先同拼豆图纸运营方友好协商解决；协商不成的，双方同意将争议提交本协议签署地有管辖权的人民法院管辖。</strong></p>
+      <p>8.4 为免歧义，特在此说明，本协议所有条款的标题仅为阅读方便，本身并无实际涵义，不能作为本协议涵义解释的依据。</p>
+    </div>
+
+    <!-- 联系卡片 -->
+    <div class="contact-card">
+      <h3>📧 如有疑问，请联系我们</h3>
+      <a class="email" href="mailto:pindou888@outlook.com">pindou888@outlook.com</a>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">我们将在 15 个工作日内回复您的来信</p>
+    </div>
+
+  </div>
+</div>
+
+<button id="backToTop" title="返回顶部">↑</button>
+
+<script>
+(function(){
+  var btn = document.getElementById('backToTop');
+  function toggle(){ btn.classList.toggle('visible', window.scrollY > 400); }
+  window.addEventListener('scroll', toggle, {passive:true});
+  btn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // 平滑滚动目录链接
+  document.querySelectorAll('.toc a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
